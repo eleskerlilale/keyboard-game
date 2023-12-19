@@ -1,39 +1,43 @@
 const keys = document.querySelectorAll(".key")
 
 function random(){
-    const r=Math.floor(Math.random()*54)
+    const r=Math.floor(Math.random()*52)
     keys[r].classList.add("jiggle")
 }
 random()
-
+console.log(keys)
 document.addEventListener("keydown", (event) => {
     const name = event.key;
     console.log(name)
     keys.forEach(k => {
         if(k.dataset.key===name.toUpperCase()){
-            console.log("shidgfdfgdft")
-            console.log(name.toUpperCase(),k.dataset.key )
-            if(k.classList.value=='key jiggle'){
-                console.log(name.toUpperCase(),k.dataset.key )
-                    k.classList.remove("jiggle")
-                    console.log("shift")
-                    random()
+            if(k.classList.value.includes('jiggle')){
+                k.classList.remove("jiggle")
+                random()    
             }    
             else{
-                // if(name.toUpperCase() == k.dataset.key){
-                    console.log("shfhghfhifdekyguyut")
-                    k.classList.add("red")
-                    // random()
-                // }
+                k.classList.add("red")
+                setInterval(() => {
+                    k.classList.remove("red")
+                }, 1000);
             }        
         }
     })
-    
 })
-const red=document.querySelector(".red")
-setInterval(() => {
-    red.classList.remove("red")
-}, 1000);
+
+keys.forEach(k => {
+    k.addEventListener("click", () => {
+        if(k.classList.value.includes("jiggle")){
+            k.classList.remove("jiggle")
+            random()
+        } else{
+            k.classList.add("red")
+            setInterval(() => {
+                k.classList.remove("red")
+            }, 1000);
+        }
+    })
+})
 // const body = document.querySelector('body');
 // const keyButtons = [...document.querySelectorAll('.key')];
 // const keys = keyButtons.map(keyButton => keyButton.dataset.key);
